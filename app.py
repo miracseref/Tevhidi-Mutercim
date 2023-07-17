@@ -3,14 +3,16 @@ import openai
 import json
 # from docx import Document
 
+
+st.title("Tevhid-î Mütercim")
+st.write("Metinlerizi çevirmek için geliştirilmiş yapay zeka tabanlı bir uygulama.")
+
 try:
     openai.api_key = json.load(open("api_key.json"))["openai"]
 except:
     st.write("Lütfen API anahtarınızı giriniz.")
     openai.api_key = st.text_input("API Anahtarı")
 
-st.title("Tevhid-î Mütercim")
-st.write("Metinlerizi çevirmek için geliştirilmiş yapay zeka tabanlı bir uygulama.")
 
 # doc = Document("Kuran_Okumaya_Cagri_YZ.docx")
 # full_text = []
