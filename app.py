@@ -1,27 +1,22 @@
 import streamlit as st
 import openai
 import json
-from docx import Document
+# from docx import Document
 
 try:
     openai.api_key = json.load(open("api_key.json"))["openai"]
 except:
     st.write("Lütfen API anahtarınızı giriniz.")
     openai.api_key = st.text_input("API Anahtarı")
-doc = Document("Kuran_Okumaya_Cagri_YZ.docx")
 
 st.title("Tevhid-î Mütercim")
 st.write("Metinlerizi çevirmek için geliştirilmiş yapay zeka tabanlı bir uygulama.")
 
-full_text = []
-for para in doc.paragraphs:
-    full_text.append(para.text)
-full_text = "\n".join(full_text)
-
-
-chunks = []
-for i in range(0, len(full_text), 16384):
-    chunks.append(full_text[i:i + 16384])
+# doc = Document("Kuran_Okumaya_Cagri_YZ.docx")
+# full_text = []
+# for para in doc.paragraphs:
+#     full_text.append(para.text)
+# full_text = "\n".join(full_text)
 
 
 def get_completion(prompt, model="gpt-3.5-turbo-16k-0613", temperature=0):
@@ -90,6 +85,10 @@ def init_input(text):
 
 
 if st.button("Çevir"):
+    chunks = []
+    full_text = init_input(text)
+    for i in range(0, len(text), 16384):
+        chunks.append(text[i:i + 16384])
     responses = []
     for i, chunk in enumerate(chunks):
         if i == 0:
