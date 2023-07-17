@@ -10,7 +10,6 @@ st.write("Metinlerizi çevirmek için geliştirilmiş yapay zeka tabanlı bir uy
 try:
     openai.api_key = json.load(open("api_key.json"))["openai"]
 except:
-    st.write("Lütfen API anahtarınızı giriniz.")
     openai.api_key = st.text_input("API Anahtarı")
 
 
